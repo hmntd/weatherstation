@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="WeatherStation.Api/WeatherStation.Api.csproj" />
+  <Project Path="WeatherStation.BusinessLogic/WeatherStation.BusinessLogic.csproj" />
+  <Project Path="WeatherStation.DataAccess/WeatherStation.DataAccess.csproj" />
+  <Project Path="WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj" />
+</Solution>
