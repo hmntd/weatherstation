@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj": {}
+    "/src/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj": {}
   },
   "projects": {
-    "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj": {
+    "/src/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj",
+        "projectUniqueName": "/src/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj",
         "projectName": "WeatherStation.DataAccess",
-        "projectPath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj",
-        "packagesPath": "/home/bazavluk/.nuget/packages/",
-        "outputPath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.DataAccess/obj/",
+        "projectPath": "/src/WeatherStation.DataAccess/WeatherStation.DataAccess.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/src/WeatherStation.DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/bazavluk/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj": {
-                "projectPath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj"
+              "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj": {
+                "projectPath": "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj"
               }
             }
           }
@@ -41,8 +41,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -50,7 +49,7 @@
           "dependencies": {
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -64,36 +63,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.26, 8.0.26]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.26, 8.0.26]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/var/snap/dotnet/common/dotnet/sdk/10.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.420/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj": {
+    "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
+        "projectUniqueName": "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
         "projectName": "WeatherStation.Infrastructure",
-        "projectPath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
-        "packagesPath": "/home/bazavluk/.nuget/packages/",
-        "outputPath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/obj/",
+        "projectPath": "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/src/WeatherStation.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/bazavluk/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -116,8 +105,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -133,22 +121,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.26, 8.0.26]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.26, 8.0.26]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/var/snap/dotnet/common/dotnet/sdk/10.0.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.420/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+WORKDIR /src
+
+RUN dotnet tool install --global dotnet-ef --version 8.*
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+COPY *.sln .
+COPY WeatherStation.Api/*.csproj WeatherStation.Api/
+COPY WeatherStation.BusinessLogic/*.csproj WeatherStation.BusinessLogic/
+COPY WeatherStation.DataAccess/*.csproj WeatherStation.DataAccess/
+COPY WeatherStation.Infrastructure/*.csproj WeatherStation.Infrastructure/
+RUN dotnet restore
+
+COPY . .
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

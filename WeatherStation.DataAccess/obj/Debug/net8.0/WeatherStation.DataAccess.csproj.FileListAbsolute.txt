@@ -1,0 +1,16 @@
+/src/WeatherStation.DataAccess/bin/Debug/net8.0/WeatherStation.DataAccess.deps.json
+/src/WeatherStation.DataAccess/bin/Debug/net8.0/WeatherStation.DataAccess.dll
+/src/WeatherStation.DataAccess/bin/Debug/net8.0/WeatherStation.DataAccess.pdb
+/src/WeatherStation.DataAccess/bin/Debug/net8.0/WeatherStation.Infrastructure.dll
+/src/WeatherStation.DataAccess/bin/Debug/net8.0/WeatherStation.Infrastructure.pdb
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.csproj.AssemblyReference.cache
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.AssemblyInfoInputs.cache
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.AssemblyInfo.cs
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.csproj.CoreCompileInputs.cache
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.sourcelink.json
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherS.4C7702E3.Up2Date
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.dll
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/refint/WeatherStation.DataAccess.dll
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/WeatherStation.DataAccess.pdb
+/src/WeatherStation.DataAccess/obj/Debug/net8.0/ref/WeatherStation.DataAccess.dll

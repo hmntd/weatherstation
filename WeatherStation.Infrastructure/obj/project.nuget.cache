@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aKCdhRml02I=",
+  "dgSpecHash": "O2bAtrRjTc4=",
   "success": true,
-  "projectFilePath": "/home/bazavluk/MyProjects/WeatherStation/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
+  "projectFilePath": "/src/WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
