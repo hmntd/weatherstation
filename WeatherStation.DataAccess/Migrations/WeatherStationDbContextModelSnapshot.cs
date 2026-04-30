@@ -19,21 +19,104 @@ namespace WeatherStation.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.AccessToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AccessTokens");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.UserCity", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "CityId");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("UserCities");
+                });
+
             modelBuilder.Entity("WeatherStation.DataAccess.Entities.WeatherRecord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Humidity")
                         .HasColumnType("double");
 
-                    b.Property<DateTime>("MeasurementTime")
+                    b.Property<DateTime>("RecordedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<double>("Temperature")
@@ -44,7 +127,64 @@ namespace WeatherStation.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("WeatherRecords");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.AccessToken", b =>
+                {
+                    b.HasOne("WeatherStation.DataAccess.Entities.User", "User")
+                        .WithMany("AccessTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.UserCity", b =>
+                {
+                    b.HasOne("WeatherStation.DataAccess.Entities.City", "City")
+                        .WithMany("UserCities")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WeatherStation.DataAccess.Entities.User", "User")
+                        .WithMany("UserCities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.WeatherRecord", b =>
+                {
+                    b.HasOne("WeatherStation.DataAccess.Entities.City", "City")
+                        .WithMany("WeatherRecords")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.City", b =>
+                {
+                    b.Navigation("UserCities");
+
+                    b.Navigation("WeatherRecords");
+                });
+
+            modelBuilder.Entity("WeatherStation.DataAccess.Entities.User", b =>
+                {
+                    b.Navigation("AccessTokens");
+
+                    b.Navigation("UserCities");
                 });
 #pragma warning restore 612, 618
         }

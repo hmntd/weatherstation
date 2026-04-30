@@ -2,9 +2,14 @@ namespace WeatherStation.DataAccess.Entities;
 
 public class WeatherRecord : BaseEntity
 {
-    public string City { get; set; } = string.Empty;
     public double Temperature { get; set; }
     public double Humidity { get; set; }
     public double WindSpeed { get; set; }
-    public DateTime MeasurementTime { get; set; }
+    public DateTime RecordedAt { get; set; }
+
+    // Зовнішній ключ (Foreign Key) на таблицю Cities
+    public int CityId { get; set; }
+
+    // Навігаційна властивість
+    public City City { get; set; } = null!;
 }
