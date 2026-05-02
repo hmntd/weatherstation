@@ -2,7 +2,9 @@ namespace WeatherStation.Web.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using WeatherStation.BusinessLogic.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class WeatherRecordController : Controller
 {
     private readonly IWeatherRecordService _weatherRecordService;

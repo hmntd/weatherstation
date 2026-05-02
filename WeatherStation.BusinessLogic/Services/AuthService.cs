@@ -6,6 +6,7 @@ using System.Text;
 using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using WeatherStation.BusinessLogic.Contracts;
 using WeatherStation.BusinessLogic.DTOs;
 using WeatherStation.BusinessLogic.DTOs.AuthDTOs;
@@ -65,7 +66,7 @@ public class AuthService : IAuthService
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("name", user.Name)
+            new Claim(ClaimTypes.Name, user.Name)
         };
 
         var token = new JwtSecurityToken(
