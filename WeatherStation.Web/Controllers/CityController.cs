@@ -48,4 +48,45 @@ public class CityController : Controller
             return View(model);
         }
     }
+
+    // GET: /City/Edit/5
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var city = await _cityService.GetCityByIdAsync(id);
+        if (city == null) return NotFound("Місто не знайдено.");
+
+        var model = new CreateCityDto
+        {
+            Name = city.Name,
+            Latitude = city.Latitude,
+            Longitude = city.Longitude
+        };
+
+        return View(model);
+    }
+
+    // POST: /City/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, CreateCityDto model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        try
+        {
+            var updated = await _cityService.UpdateCityAsync(id, model);
+            if (!updated) return NotFound();
+
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception)
+        {
+            ModelState.AddModelError(string.Empty, "Сталася помилка при збереженні змін.");
+            return View(model);
+        }
+    }
 }
