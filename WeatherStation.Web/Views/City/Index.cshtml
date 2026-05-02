@@ -1,0 +1,55 @@
+@model IEnumerable<WeatherStation.BusinessLogic.DTOs.CityDto>
+
+@{
+    ViewData["Title"] = "Список міст";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🌍 Моніторинг Міст</h2>
+
+    <div class="mb-3">
+        <a asp-controller="City" asp-action="Create" class="btn btn-success">
+            + Додати нове місто
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва міста</th>
+                        <th>Широта (Latitude)</th>
+                        <th>Довгота (Longitude)</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var city in Model)
+                    {
+                        <tr>
+                            <td>@city.Id</td>
+                            <td><strong>@city.Name</strong></td>
+                            <td>@city.Latitude</td>
+                            <td>@city.Longitude</td>
+                            <td>
+                                <a class="btn btn-sm btn-info text-white" asp-controller="WeatherRecord"
+                                       asp-action="History" asp-route-cityId="@city.Id">
+                                    Подивитися погоду
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning mt-3 text-center" role="alert">
+                    Міста ще не додані до бази даних.
+                </div>
+            }
+        </div>
+    </div>
+</div>
