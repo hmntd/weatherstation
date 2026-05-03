@@ -1,0 +1,67 @@
+@using Microsoft.AspNetCore.Identity
+@model IdentityUser
+
+@{
+    ViewData["Title"] = "Мій профіль";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">Основні дані</div>
+                <div class="card-body">
+                    <form asp-controller="Profile" asp-action="UpdateProfile" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Email (Логін)</label>
+                            <input type="email" class="form-control" value="@Model.Email" disabled />
+                            <div class="form-text">Email використовується як логін і не може бути змінений.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Ім'я користувача</label>
+                            <input type="text" class="form-control" id="userName" name="userName" value="@Model.UserName" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Зберегти ім'я</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">Зміна пароля</div>
+                <div class="card-body">
+                    <form asp-controller="Profile" asp-action="ChangePassword" method="post">
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Поточний пароль</label>
+                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Новий пароль</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required minlength="6" />
+                        </div>
+                        <button type="submit" class="btn btn-warning">Змінити пароль</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
