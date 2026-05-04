@@ -1,0 +1,40 @@
+@model IEnumerable<WeatherStation.BusinessLogic.DTOs.WeatherRecordDto>
+
+@{
+    ViewData["Title"] = "Історія погоди";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🌡️ Історія погоди (Місто ID: @ViewBag.CityId)</h2>
+    <a class="btn btn-secondary" asp-controller="City" asp-action="Index">Назад до міст</a>
+</div>
+
+<div class="row">
+    @if (!Model.Any())
+    {
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                Даних про погоду для цього міста ще немає в базі. (Синхронізуй їх через API!)
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var record in Model)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        @record.RecordedAt.ToString("dd.MM.yyyy HH:mm")
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title text-center">@record.Temperature °C</h3>
+                        <hr />
+                        <p class="card-text mb-1">💧 Вологість: <strong>@record.Humidity %</strong></p>
+                        <p class="card-text mb-0">💨 Вітер: <strong>@record.WindSpeed км/год</strong></p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

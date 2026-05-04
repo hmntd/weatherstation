@@ -9,4 +9,5 @@ public interface ICityService
     Task<CityDto> CreateCityAsync(CreateCityDto createDto);
     Task<bool> UpdateCityAsync(int id, CreateCityDto updateDto);
     Task<bool> DeleteCityAsync(int id);
+    Task<CityDto> AddCityAsync(CityDto cityDto);
 }

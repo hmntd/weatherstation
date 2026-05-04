@@ -74,6 +74,8 @@ builder.Services.AddScoped<IWeatherRecordService, WeatherRecordService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddHostedService<WeatherStation.Api.HostedServices.WeatherSyncBackgroundService>();
+
 builder.Services.AddHttpClient<IWeatherProviderService, OpenMeteoService>();
 
 var app = builder.Build();

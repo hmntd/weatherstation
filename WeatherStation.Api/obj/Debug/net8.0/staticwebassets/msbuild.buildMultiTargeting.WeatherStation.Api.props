@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/WeatherStation.Api.props" />
-</Project>

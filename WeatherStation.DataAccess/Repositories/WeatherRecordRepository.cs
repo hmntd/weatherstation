@@ -18,7 +18,7 @@ public class WeatherRecordRepository : IWeatherRecordRepository
     {
         return await _context.WeatherRecords
             .Where(wr => wr.CityId == cityId)
-            .OrderBy(wr => wr.RecordedAt)
+            .OrderByDescending(wr => wr.RecordedAt)
             .ToListAsync();
     }
 

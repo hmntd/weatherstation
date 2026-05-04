@@ -72,4 +72,19 @@ public class CityService : ICityService
         await _cityRepository.DeleteAsync(city);
         return true;
     }
+
+    public async Task<CityDto> AddCityAsync(CityDto cityDto)
+    {
+        var city = new City
+        {
+            Name = cityDto.Name,
+            Latitude = cityDto.Latitude,
+            Longitude = cityDto.Longitude
+        };
+
+        await _cityRepository.AddAsync(city);
+
+        cityDto.Id = city.Id;
+        return cityDto;
+    }
 }
