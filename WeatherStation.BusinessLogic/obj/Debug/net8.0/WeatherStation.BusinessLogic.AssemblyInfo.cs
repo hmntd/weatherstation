@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeatherStation.BusinessLogic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f83169146b3248c81ec8b99874c62a8e945181fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6229f6779db7edb9138c3f7ba5c90c094c64a50")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeatherStation.BusinessLogic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeatherStation.BusinessLogic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
