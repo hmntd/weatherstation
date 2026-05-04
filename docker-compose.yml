@@ -47,13 +47,17 @@ services:
   weather-web:
     build:
       context: .
-      dockerfile: WeatherStation.Web/Dockerfile
+      dockerfile: WeatherStation.Web/Dockerfile.dev
     container_name: weather_web
     ports:
       - "8081:8080"
+    volumes:
+      - .:/app
+      - ./WeatherStation.Web/logs:/app/WeatherStation.Web/logs
     environment:
       - ConnectionStrings__DefaultConnection=Server=weather_mysql;Port=3306;Database=db;User=user;Password=password;
       - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
     depends_on:
       mysql-db:
         condition: service_healthy
