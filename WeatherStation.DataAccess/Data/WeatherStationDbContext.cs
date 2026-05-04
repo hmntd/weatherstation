@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using WeatherStation.DataAccess.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WeatherStation.DataAccess.Data;
 
-public class WeatherStationDbContext : DbContext
+public class WeatherStationDbContext : IdentityDbContext<IdentityUser>
 {
     public WeatherStationDbContext(DbContextOptions<WeatherStationDbContext> options)
-        : base(options)
-    {
-    }
+            : base(options) { }
 
-    public DbSet<User> Users => Set<User>();
+    // public DbSet<User> Users => Set<User>();
     public DbSet<City> Cities => Set<City>();
     public DbSet<WeatherRecord> WeatherRecords => Set<WeatherRecord>();
     public DbSet<AccessToken> AccessTokens => Set<AccessToken>();
