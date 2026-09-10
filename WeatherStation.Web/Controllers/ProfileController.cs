@@ -17,7 +17,7 @@ public class ProfileController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
         var user = await _userManager.FindByIdAsync(userId);
         return View(user);
     }
