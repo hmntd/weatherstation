@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+WORKDIR /app
+
+COPY ["WeatherStation.Web/WeatherStation.Web.csproj", "WeatherStation.Web/"]
+COPY ["WeatherStation.BusinessLogic/WeatherStation.BusinessLogic.csproj", "WeatherStation.BusinessLogic/"]
+COPY ["WeatherStation.DataAccess/WeatherStation.DataAccess.csproj", "WeatherStation.DataAccess/"]
+COPY ["WeatherStation.Infrastructure/WeatherStation.Infrastructure.csproj", "WeatherStation.Infrastructure/"]
+
+RUN dotnet restore "WeatherStation.Web/WeatherStation.Web.csproj"
+
+COPY . .
+WORKDIR "/app/WeatherStation.Web"
+
+RUN mkdir -p logs && chmod 777 logs
+
+ENTRYPOINT ["dotnet", "watch", "run", "--urls", "http://+:8080"]
