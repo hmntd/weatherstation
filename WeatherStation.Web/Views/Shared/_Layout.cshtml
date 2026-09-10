@@ -34,6 +34,9 @@
                                 <span class="nav-link text-light">Привіт, @User.Identity.Name!</span>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" asp-controller="Profile" asp-action="Index">Мій профіль</a>
+                            </li>
+                            <li class="nav-item">
                                 <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
                                     <button type="submit" class="btn btn-outline-light btn-sm mt-1 ms-2">Вийти</button>
                                 </form>
@@ -46,6 +49,13 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Auth" asp-action="Register">Реєстрація</a>
+                            </li>
+                        }
+                        @if (User.Identity!.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-danger fw-bold" asp-area="" asp-controller="Admin"
+                                   asp-action="Index">Адмін-панель</a>
                             </li>
                         }
                     </ul>

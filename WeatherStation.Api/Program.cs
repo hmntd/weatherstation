@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using WeatherStation.DataAccess.Data;
 using WeatherStation.Api.Controllers;
 using WeatherStation.BusinessLogic.Contracts;
 using WeatherStation.BusinessLogic.Services;
@@ -67,11 +69,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+options.Password.RequireDigit = false;
+options.Password.RequiredLength = 6;
+options.Password.RequireNonAlphanumeric = false;
+options.Password.RequireUppercase = false;
+})
+.AddEntityFrameworkStores<WeatherStation.DataAccess.Data.WeatherStationDbContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IWeatherRecordRepository, WeatherRecordRepository>();
 builder.Services.AddScoped<IWeatherRecordService, WeatherRecordService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddHostedService<WeatherStation.Api.HostedServices.WeatherSyncBackgroundService>();

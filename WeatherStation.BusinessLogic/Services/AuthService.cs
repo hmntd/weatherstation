@@ -3,71 +3,79 @@ namespace WeatherStation.BusinessLogic.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using WeatherStation.BusinessLogic.Contracts;
-using WeatherStation.BusinessLogic.DTOs;
 using WeatherStation.BusinessLogic.DTOs.AuthDTOs;
-using WeatherStation.DataAccess.Entities;
-using WeatherStation.DataAccess.Repositories;
-using WeatherStation.DataAccess.Contracts;
 
 public class AuthService : IAuthService
 {
-    private readonly IUserRepository _userRepository;
+    private readonly UserManager<IdentityUser> _userManager;
     private readonly IConfiguration _configuration;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration)
+    public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration)
     {
-        _userRepository = userRepository;
+        _userManager = userManager;
         _configuration = configuration;
     }
 
     public async Task<AuthResponseDto> RegisterAsync(UserRegisterDto registerDto)
     {
-        var existingUser = await _userRepository.GetByEmailAsync(registerDto.Email);
+        var existingUser = await _userManager.FindByEmailAsync(registerDto.Email);
         if (existingUser != null)
             throw new Exception("Користувач з таким email вже існує.");
 
-        var user = new User
+        var user = new IdentityUser
         {
-            Name = registerDto.Name,
-            Email = registerDto.Email,
-            Password = BCrypt.HashPassword(registerDto.Password)
+            UserName = registerDto.Name ?? registerDto.Email,
+            Email = registerDto.Email
         };
 
-        var createdUser = await _userRepository.AddAsync(user);
+        var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        var token = GenerateJwtToken(createdUser);
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            throw new Exception($"Помилка реєстрації: {errors}");
+        }
+
+        var roles = await _userManager.GetRolesAsync(user);
+        var token = GenerateJwtToken(user, roles);
 
         return new AuthResponseDto { Token = token, Message = "Реєстрація успішна" };
     }
 
     public async Task<AuthResponseDto> LoginAsync(UserLoginDto loginDto)
     {
-        var user = await _userRepository.GetByEmailAsync(loginDto.Email);
+        var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-        if (user == null || !BCrypt.Verify(loginDto.Password, user.Password))
+        if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             throw new Exception("Невірний email або пароль.");
 
-        var token = GenerateJwtToken(user);
+        var roles = await _userManager.GetRolesAsync(user);
+        var token = GenerateJwtToken(user, roles);
+
         return new AuthResponseDto { Token = token, Message = "Вхід успішний" };
     }
 
-    private string GenerateJwtToken(User user)
+    private string GenerateJwtToken(IdentityUser user, IList<string> roles)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.Name)
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email!),
+            new Claim(ClaimTypes.Name, user.UserName!)
         };
+
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         var token = new JwtSecurityToken(
             issuer: jwtSettings["Issuer"],

@@ -42,7 +42,7 @@ public class CityController : Controller
             await _cityService.CreateCityAsync(model);
             return RedirectToAction(nameof(Index));
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             ModelState.AddModelError(string.Empty, "Помилка при додаванні міста. Можливо, воно вже існує.");
             return View(model);
